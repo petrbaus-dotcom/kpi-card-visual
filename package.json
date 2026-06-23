@@ -1,0 +1,26 @@
+{
+  "name": "kpicard",
+  "version": "1.0.0",
+  "description": "KPI card with actual value, up to 4 comparisons, delta (value + %) and good/bad trend arrows.",
+  "scripts": {
+    "pbiviz": "pbiviz",
+    "start": "pbiviz start",
+    "package": "pbiviz package",
+    "lint": "tsc --noEmit"
+  },
+  "author": {
+    "name": "Petr Baus",
+    "email": "petrbaus@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "powerbi-visuals-api": "~5.11.0",
+    "powerbi-visuals-utils-formattingmodel": "^6.1.1",
+    "powerbi-visuals-utils-formattingutils": "^6.0.4"
+  },
+  "devDependencies": {
+    "powerbi-visuals-tools": "^5.6.0",
+    "typescript": "^5.4.5",
+    "less": "^4.2.0"
+  }
+}

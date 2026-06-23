@@ -1,0 +1,87 @@
+{
+  "dataRoles": [
+    {
+      "displayName": "Actual",
+      "description": "The main (current) value shown large in the card.",
+      "name": "actual",
+      "kind": "Measure"
+    },
+    {
+      "displayName": "Comparison",
+      "description": "One to four values to compare the Actual against (e.g. LY, Plan, Target). Each produces its own delta row.",
+      "name": "comparison",
+      "kind": "Measure"
+    }
+  ],
+  "dataViewMappings": [
+    {
+      "conditions": [
+        {
+          "actual": { "max": 1 },
+          "comparison": { "max": 4 }
+        }
+      ],
+      "categorical": {
+        "values": {
+          "select": [
+            { "bind": { "to": "actual" } },
+            { "for": { "in": "comparison" } }
+          ]
+        }
+      }
+    }
+  ],
+  "objects": {
+    "title": {
+      "properties": {
+        "show": { "type": { "bool": true } },
+        "titleText": { "type": { "text": true } },
+        "fontColor": { "type": { "fill": { "solid": { "color": true } } } },
+        "fontSize": { "type": { "formatting": { "fontSize": true } } },
+        "alignment": { "type": { "enumeration": [] } },
+        "overflow": { "type": { "enumeration": [] } }
+      }
+    },
+    "actual": {
+      "properties": {
+        "fontColor": { "type": { "fill": { "solid": { "color": true } } } },
+        "fontSize": { "type": { "formatting": { "fontSize": true } } },
+        "displayUnits": { "type": { "formatting": { "labelDisplayUnits": true } } },
+        "decimalPlaces": { "type": { "numeric": true } },
+        "thousandsSeparator": { "type": { "bool": true } },
+        "alignment": { "type": { "enumeration": [] } }
+      }
+    },
+    "comparison": {
+      "properties": {
+        "fontColor": { "type": { "fill": { "solid": { "color": true } } } },
+        "fontSize": { "type": { "formatting": { "fontSize": true } } },
+        "valueMode": { "type": { "enumeration": [] } },
+        "showValue": { "type": { "bool": true } },
+        "showPercent": { "type": { "bool": true } },
+        "decimalPlaces": { "type": { "numeric": true } },
+        "percentDecimalPlaces": { "type": { "numeric": true } },
+        "thousandsSeparator": { "type": { "bool": true } },
+        "showLabel": { "type": { "bool": true } },
+        "customLabels": { "type": { "text": true } },
+        "alignment": { "type": { "enumeration": [] } },
+        "overflow": { "type": { "enumeration": [] } }
+      }
+    },
+    "trend": {
+      "properties": {
+        "higherIsBetter": { "type": { "bool": true } },
+        "showArrow": { "type": { "bool": true } },
+        "colorizeValue": { "type": { "bool": true } },
+        "goodColor": { "type": { "fill": { "solid": { "color": true } } } },
+        "badColor": { "type": { "fill": { "solid": { "color": true } } } },
+        "neutralColor": { "type": { "fill": { "solid": { "color": true } } } }
+      }
+    }
+  },
+  "supportsHighlight": false,
+  "supportsKeyboardFocus": true,
+  "supportsLandingPage": true,
+  "supportsEmptyDataView": true,
+  "privileges": []
+}

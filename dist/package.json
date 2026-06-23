@@ -1,0 +1,17 @@
+{
+		"version": "1.0.0.0",
+		"author": {"name":"Petr Baus","email":"petrbaus@gmail.com"},
+		"resources": [
+			{
+				"resourceId": "rId0",
+				"sourceType": 5,
+				"file": "resources/kpiCard6B1F4E2A9C8D4F0EB3A7C5D9E1F20384.pbiviz.json"
+			}
+		],
+		"visual": {"name":"kpiCard","displayName":"KPI Card (Actual / Comparison / Delta)","guid":"kpiCard6B1F4E2A9C8D4F0EB3A7C5D9E1F20384","visualClassName":"Visual","version":"1.0.0.0","description":"KPI card showing an actual value, up to 4 comparison values, the delta (absolute + %) and a trend arrow with configurable good/bad direction.","supportUrl":"https://community.fabric.microsoft.com/","gitHubUrl":"https://github.com/"},
+		"metadata": {
+			"pbivizjson": {
+				"resourceId": "rId0"
+			}
+		}
+	}

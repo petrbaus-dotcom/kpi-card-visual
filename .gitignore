@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build / temp artifacts
+.tmp/
+.api/
+coverage/
+webpack.statistics*.html
+*.log
+npm-debug.log*
+
+# Certificates
+*.pfx
+*.pem
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
