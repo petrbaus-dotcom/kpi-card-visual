@@ -99,12 +99,13 @@ export class Visual implements IVisual {
         }
 
         // ---- Actual value
-        const actualFormatter = vf.create({
-            format: this.buildFormat(actualCol.source.format, s.actual.thousandsSeparator.value, s.actual.decimalPlaces.value),
-            value: Number(s.actual.displayUnits.value) || 0,
-            precision: s.actual.decimalPlaces.value,
-            cultureSelector: this.host.locale
-        });
+        const actualFormatter = this.makeFormatter(
+            actualCol.source.format,
+            s.actual.overrideFormat.value,
+            s.actual.thousandsSeparator.value,
+            s.actual.decimalPlaces.value,
+            Number(s.actual.displayUnits.value) || 0
+        );
 
         const actualEl = document.createElement("div");
         actualEl.className = "kpi-actual";
@@ -123,12 +124,6 @@ export class Visual implements IVisual {
         rowsWrap.className = "kpi-rows";
         this.root.appendChild(rowsWrap);
 
-        const valueFmt = vf.create({
-            format: this.buildFormat(actualCol.source.format, s.comparison.thousandsSeparator.value, s.comparison.decimalPlaces.value),
-            value: Number(s.actual.displayUnits.value) || 0,
-            precision: s.comparison.decimalPlaces.value,
-            cultureSelector: this.host.locale
-        });
         const percentFmt = vf.create({
             format: "0.%",
             precision: s.comparison.percentDecimalPlaces.value,
@@ -141,6 +136,15 @@ export class Visual implements IVisual {
             const compValue = this.toNumber(col.values?.[0]);
             const label = customLabels[i] !== undefined ? customLabels[i] : col.source.displayName;
             const row = this.buildRow(actualValue, compValue, label);
+            // Format each row with its own comparison column's format string, so changing a
+            // measure's format in the model is reflected. Override mode swaps in the custom format.
+            const valueFmt = this.makeFormatter(
+                col.source.format,
+                s.comparison.overrideFormat.value,
+                s.comparison.thousandsSeparator.value,
+                s.comparison.decimalPlaces.value,
+                Number(s.actual.displayUnits.value) || 0
+            );
             rowsWrap.appendChild(this.renderRow(row, valueFmt, percentFmt));
         });
     }
@@ -309,6 +313,34 @@ export class Visual implements IVisual {
                 el.style.textOverflow = "ellipsis";
                 break;
         }
+    }
+
+    /**
+     * Creates a value formatter. By default it honors the column's own format string from
+     * the model (thousands separator, currency, decimals, custom formats all carry over).
+     * Only when `override` is on does it impose the visual's own thousands-separator /
+     * decimals / display-units settings.
+     */
+    private makeFormatter(
+        sourceFormat: string,
+        override: boolean,
+        thousands: boolean,
+        decimals: number,
+        displayUnits: number
+    ): vf.IValueFormatter {
+        if (!override) {
+            return vf.create({
+                format: sourceFormat,
+                value: displayUnits,
+                cultureSelector: this.host.locale
+            });
+        }
+        return vf.create({
+            format: this.buildFormat(sourceFormat, thousands, decimals),
+            value: displayUnits,
+            precision: decimals,
+            cultureSelector: this.host.locale
+        });
     }
 
     /**

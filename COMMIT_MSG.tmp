@@ -1,0 +1,10 @@
+Respect column format by default; add "Override column format" toggle
+
+The card no longer discards the model's format string. By default it now uses
+each measure's own format (thousands separator, currency, decimals, custom
+formats all carry over). The visual's own thousands-separator / decimals /
+display-units settings apply only when the new "Override column format" toggle
+is enabled (Actual and Comparison cards). Comparison rows now format with each
+comparison column's own format string instead of the Actual column's.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>

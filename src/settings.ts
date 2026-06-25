@@ -82,6 +82,13 @@ class ActualCardSettings extends FormattingSettingsCard {
         value: 36
     });
 
+    overrideFormat = new formattingSettings.ToggleSwitch({
+        name: "overrideFormat",
+        displayName: "Override column format",
+        description: "Off (default): use the measure's own format from the model. On: apply the display units, decimals and thousands separator below.",
+        value: false
+    });
+
     displayUnits = new formattingSettings.AutoDropdown({
         name: "displayUnits",
         displayName: "Display units",
@@ -109,7 +116,7 @@ class ActualCardSettings extends FormattingSettingsCard {
 
     name: string = "actual";
     displayName: string = "Actual value";
-    slices = [this.fontColor, this.fontSize, this.displayUnits, this.decimalPlaces, this.thousandsSeparator, this.alignment];
+    slices = [this.fontColor, this.fontSize, this.overrideFormat, this.displayUnits, this.decimalPlaces, this.thousandsSeparator, this.alignment];
 }
 
 /**
@@ -151,6 +158,13 @@ class ComparisonCardSettings extends FormattingSettingsCard {
         description: "Overrides the measure name(s). For several comparisons separate them with ; or , in field order, e.g. 'Loni; Plán; Cíl'.",
         value: "",
         placeholder: "e.g. Loni; Plán"
+    });
+
+    overrideFormat = new formattingSettings.ToggleSwitch({
+        name: "overrideFormat",
+        displayName: "Override column format",
+        description: "Off (default): use each comparison measure's own format from the model. On: apply the decimals and thousands separator below.",
+        value: false
     });
 
     thousandsSeparator = new formattingSettings.ToggleSwitch({
@@ -207,6 +221,7 @@ class ComparisonCardSettings extends FormattingSettingsCard {
         this.showPercent,
         this.decimalPlaces,
         this.percentDecimalPlaces,
+        this.overrideFormat,
         this.thousandsSeparator,
         this.showLabel,
         this.customLabels,
